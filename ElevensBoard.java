@@ -53,7 +53,14 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int size = selectedCards.size();
+		if (size == 2){
+			return containsPairSum11(selectedCards);
+		}
+		if (size == 3){
+			return containsJQK(selectedCards);
+		}
+		return false;
 	}
 
 	/**
@@ -66,7 +73,7 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean anotherPlayIsPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		return containsJQK(cardIndexes()) || containsPairSum11(cardIndexes());
 	}
 
 	/**
@@ -78,7 +85,18 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		boolean result = false;
+		for (int i = 0; i < selectedCards.size(); i++){
+			for (int j = i; j < selectedCards.size(); j++){
+				int pValue1 = cardAt(selectedCards.get(i)).pointValue();
+				int pValue2 = cardAt(selectedCards.get(i)).pointValue();
+				if (pValue1 + pValue2 == 11){
+					result = true;
+				}
+			}
+		}
+		System.out.println(result);
+		return result;
 	}
 
 	/**
@@ -90,6 +108,27 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		boolean hasJack = false;
+		boolean hasQueen = false;
+		boolean hasKing = false;
+		boolean result = false;
+		
+		for (int i = 0; i < selectedCards.size(); i++){
+			if (cardAt(selectedCards.get(i)).rank().equals("jack")){
+				hasJack = true;
+			}
+			if (cardAt(selectedCards.get(i)).rank().equals("queen")){
+				hasQueen = true;
+			}
+			if (cardAt(selectedCards.get(i)).rank().equals("king")){
+				hasKing = true;
+			}
+		}
+
+		if (hasJack && hasQueen && hasKing){
+			result = true;
+		}
+		System.out.println(result);
+		return result;
 	}
 }
