@@ -1,0 +1,2 @@
+1. Differences in board size between games can be created through a difference in the instance variable size, not the method. The size method is the same across all types of games, as it just returns the size of the board regardless of what it returns.
+2. Selecting cards to be removed or replaced is the same across all games using the Board parent class, so it can just be defined in the board class to save time writing it out for all of the different potential games.
