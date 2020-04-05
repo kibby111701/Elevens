@@ -85,18 +85,19 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		boolean result = false;
-		for (int i = 0; i < selectedCards.size(); i++){
-			for (int j = i; j < selectedCards.size(); j++){
+		if (selectedCards.size() < 2){
+			return false;
+		}
+		for (int i = 0; i < selectedCards.size() - 1; i++){
+			for (int j = i + 1; j < selectedCards.size(); j++){
 				int pValue1 = cardAt(selectedCards.get(i)).pointValue();
-				int pValue2 = cardAt(selectedCards.get(i)).pointValue();
+				int pValue2 = cardAt(selectedCards.get(j)).pointValue();
 				if (pValue1 + pValue2 == 11){
-					result = true;
+					return true;
 				}
 			}
 		}
-		System.out.println(result);
-		return result;
+		return false;
 	}
 
 	/**
